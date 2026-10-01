@@ -53,6 +53,18 @@ class TestCore(unittest.TestCase):
         self.assertFalse(core.bug_11(state))
         self.assertEqual(state["balance"], 10)
 
+    def test_10(self):
+        state = core.new_game()
+        state["value"] = 8
+        state["log"] = [("op", "failed")]
+        core.bug_30(state)
+        self.assertEqual(state["value"], 5)
+
+    def test_11(self):
+        state = core.new_game()
+        state["settled"] = True
+        self.assertFalse(core.bug_31(state))
+
 
 if __name__ == "__main__":
     unittest.main()
